@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "strict": true,
+      "jsx": "react",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "baseUrl": "./",
+      "paths": {
+        "@client/*": ["apps/client/*"],
+        "@server/*": ["apps/server/*"]
+      }
+    },
+    "include": ["apps/**/*", "server/db", "server/api"],
+    "exclude": ["node_modules"]
+  }
+  

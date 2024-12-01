@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "client": "vite ./apps/client",
+    "server": "tsx apps/server/index.ts",
+    "dev": "bun run server & bun run client"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "latest",
+    "@trpc/client": "next",
+    "@trpc/react-query": "next",
+    "@trpc/server": "next",
+    "@vitejs/plugin-react": "^4.3.4",
+    "bun": "^1.1.38",
+    "bun-types": "^1.1.38",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.36.4",
+    "pg": "^8.13.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "superjson": "^2.2.1",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/pg": "^8.11.10",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "drizzle-kit": "^0.28.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
