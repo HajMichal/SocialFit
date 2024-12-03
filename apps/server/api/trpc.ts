@@ -1,6 +1,6 @@
 import { initTRPC } from "@trpc/server";
 import type { CreateHTTPContextOptions } from "@trpc/server/adapters/standalone";
-import { db } from "../db/index.ts";
+import { db } from "../db/index";
 import SuperJSON from "superjson";
 
 /**

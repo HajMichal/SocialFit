@@ -11,7 +11,8 @@
       "paths": {
         "@client/*": ["apps/client/*"],
         "@server/*": ["apps/server/*"]
-      }
+      },
+      "types": ["node", "vite/client"]
     },
     "include": ["apps/**/*", "server/db", "server/api"],
     "exclude": ["node_modules"]

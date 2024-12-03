@@ -9,12 +9,13 @@ import {
   varchar,
   jsonb,
 } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
+import { InferSelectModel, relations } from "drizzle-orm";
 
 export const rolesEnum = pgEnum("roles", ["gymmer", "trainer", "admin"]);
 
 export const roleEnum = pgEnum("role", ["gymmer", "trainer", "admin"]);
 
+export type User = InferSelectModel<typeof users>;
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),
@@ -44,6 +45,7 @@ export const usersRelations = relations(users, ({ many, one }) => ({
   }),
 }));
 
+export type Friendships = InferSelectModel<typeof friendships>;
 export const friendships = pgTable("friendships", {
   userId: uuid("user_id")
     .notNull()
@@ -53,6 +55,7 @@ export const friendships = pgTable("friendships", {
     .references(() => users.id),
 });
 
+export type Trainings = InferSelectModel<typeof trainings>;
 export const trainings = pgTable("trainings", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),
@@ -66,35 +69,56 @@ export const trainings = pgTable("trainings", {
     .references(() => users.id),
 });
 export const trainingsRelations = relations(trainings, ({ many, one }) => ({
-  exercises: many(exercises),
+  trainingDay: many(trainingDay),
   user: one(users, {
     fields: [trainings.userId],
     references: [users.id],
   }),
 }));
 
-export const exercises = pgTable("exercises", {
+export type TrainingDay = InferSelectModel<typeof trainingDay>;
+export const trainingDay = pgTable("trainingDay", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
-  series: varchar("series", { length: 50 }).notNull(),
-  reps: jsonb("reps").notNull(), // Storing as JSON string
-  kilograms: decimal("kilograms", { precision: 5, scale: 2 }),
-  rpe: decimal("rpe", { precision: 3, scale: 1 }),
-  trainingNumber: integer("training_number").notNull(),
   createdAt: date("created_at").notNull().defaultNow(),
   updatedAt: date("updated_at").notNull().defaultNow(),
   trainingId: uuid("training_id")
     .notNull()
     .references(() => trainings.id),
 });
-export const exercisesRelations = relations(exercises, ({ one }) => ({
-  training: one(trainings, {
-    fields: [exercises.trainingId],
+export const trainingDayRelations = relations(trainingDay, ({ many, one }) => ({
+  exercises: many(exercises),
+  trainingDay: one(trainings, {
+    fields: [trainingDay.trainingId],
     references: [trainings.id],
   }),
 }));
 
+export type Exercises = InferSelectModel<typeof exercises>;
+export const exercises = pgTable("exercises", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  series: integer("series").notNull(),
+  reps: jsonb("reps").notNull(), // Storing as JSON string
+  kilograms: decimal("kilograms", { precision: 5, scale: 2 }),
+  rpe: decimal("rpe", { precision: 3, scale: 1 }),
+  trainingNumber: integer("training_number").notNull(),
+  createdAt: date("created_at").notNull().defaultNow(),
+  updatedAt: date("updated_at").notNull().defaultNow(),
+  trainingDayId: uuid("training_id")
+    .notNull()
+    .references(() => trainingDay.id),
+});
+export const exercisesRelations = relations(exercises, ({ one }) => ({
+  trainingDay: one(trainingDay, {
+    fields: [exercises.trainingDayId],
+    references: [trainingDay.id],
+  }),
+}));
+
+export type Sessions = InferSelectModel<typeof sessions>;
 export const sessions = pgTable("sessions", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),

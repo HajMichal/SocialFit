@@ -1,20 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { TrpcProvider } from "./TrpcProvider";
-import { trpc } from "./api/trpc";
-
-const App = () => {
-  const { data } = trpc.example.test.useQuery();
-  console.log(data);
-  return (
-    <div>
-      <h1>{data?.Hello ?? "Loading..."}</h1>
-    </div>
-  );
-};
+import { TrpcProvider } from "./api/TrpcProvider";
+import App from "./App";
+import { BrowserRouter } from "react-router";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <TrpcProvider>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </TrpcProvider>
 );
