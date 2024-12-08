@@ -6,5 +6,5 @@ export default function TestRoute() {
   const { data: users } = trpc.example.users.useQuery();
   console.log(data);
   console.log(users);
-  return <div>TestRoute</div>;
+  return <div className="min-w-full min-h-screen bg-[#F9F9F9]">TestRoute</div>;
 }

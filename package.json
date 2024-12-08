@@ -11,12 +11,14 @@
     "@trpc/react-query": "next",
     "@trpc/server": "next",
     "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "latest",
     "bun": "^1.1.38",
     "bun-types": "^1.1.38",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.4",
     "pg": "^8.13.1",
+    "postcss": "latest",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^7.0.2",
@@ -30,7 +32,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "drizzle-kit": "^0.28.1",
-    "tailwindcss": "^3.4.15",
+    "tailwindcss": "latest",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   }

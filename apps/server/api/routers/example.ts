@@ -6,7 +6,6 @@ export const exampleRouter = createTRPCRouter({
   }),
   users: publicProcedure.query(async ({ ctx }) => {
     const users = await ctx.drizzle.query.users.findMany();
-    console.log(users[0]);
     return users[0];
   }),
 });
