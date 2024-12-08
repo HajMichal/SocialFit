@@ -2,7 +2,8 @@
   "scripts": {
     "client": "vite ./apps/client",
     "server": "tsx apps/server/index.ts",
-    "dev": "bun run server & bun run client"
+    "dev": "bun run server & bun run client",
+    "drizzle:seed": "bun --loader esbuild-register ./aps/server/db/seed.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "latest",

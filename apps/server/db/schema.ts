@@ -83,13 +83,14 @@ export const trainingDay = pgTable("trainingDay", {
   description: text("description"),
   createdAt: date("created_at").notNull().defaultNow(),
   updatedAt: date("updated_at").notNull().defaultNow(),
+  trainingNumber: integer("training_number").notNull().default(0),
   trainingId: uuid("training_id")
     .notNull()
     .references(() => trainings.id),
 });
 export const trainingDayRelations = relations(trainingDay, ({ many, one }) => ({
   exercises: many(exercises),
-  trainingDay: one(trainings, {
+  training: one(trainings, {
     fields: [trainingDay.trainingId],
     references: [trainings.id],
   }),
@@ -104,7 +105,6 @@ export const exercises = pgTable("exercises", {
   reps: jsonb("reps").notNull(), // Storing as JSON string
   kilograms: decimal("kilograms", { precision: 5, scale: 2 }),
   rpe: decimal("rpe", { precision: 3, scale: 1 }),
-  trainingNumber: integer("training_number").notNull(),
   createdAt: date("created_at").notNull().defaultNow(),
   updatedAt: date("updated_at").notNull().defaultNow(),
   trainingDayId: uuid("training_id")
