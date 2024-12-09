@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.4",
+    "lucide-react": "^0.468.0",
     "pg": "^8.13.1",
     "postcss": "latest",
     "react": "^18.3.1",
@@ -24,7 +25,8 @@
     "react-router": "^7.0.2",
     "styled-components": "^6.1.13",
     "superjson": "^2.2.1",
-    "vite": "latest"
+    "vite": "latest",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
