@@ -96,7 +96,10 @@ export const trainingDayRelations = relations(trainingDay, ({ many, one }) => ({
   }),
 }));
 
-export type Exercises = InferSelectModel<typeof exercises>;
+type ExercisesBase = InferSelectModel<typeof exercises>;
+export interface Exercises extends ExercisesBase {
+  reps: string[];
+}
 export const exercises = pgTable("exercises", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),

@@ -1,3 +1,4 @@
+import { Exercises } from "@server/db/schema";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
 
@@ -20,9 +21,9 @@ export const exampleRouter = createTRPCRouter({
     return user;
   }),
   exercises: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
-    const exercises = await ctx.drizzle.query.exercises.findFirst({
+    const exercises = await ctx.drizzle.query.exercises.findMany({
       where: (fields, { eq }) => eq(fields.trainingDayId, input),
     });
-    return exercises ?? null;
+    return (exercises as Exercises[]) ?? null;
   }),
 });

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { trpc } from "../api/trpc";
 import { Exercises } from "../components/Exercises";
+import { ContentHeader, Header } from "../components/styled/Text";
 
 function Home() {
   const [choosedTrainingDay, setTrainingDay] = useState<string | undefined>();
@@ -48,7 +49,7 @@ const TrainingTile = styled.div`
   max-width: 150px;
   height: 5rem;
   border-radius: 15px;
-  box-shadow: 0px 5px 6px 0px #babac0;
+  box-shadow: 0px 4px 6px 0px #d7d7d7;
   margin-right: 13px;
   margin-left: 13px;
   padding: 10px;
@@ -60,15 +61,4 @@ const TrainingTile = styled.div`
     border: solid #02cf8a 2px;
     padding: 8px;
   }
-`;
-
-export const Header = styled.h1`
-  font-family: "Montserrat";
-  font-weight: 600;
-  margin: 15px;
-`;
-const ContentHeader = styled.h1`
-  font-family: "Montserrat";
-  font-weight: 600;
-  font-size: 15px;
 `;
