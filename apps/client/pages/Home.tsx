@@ -2,8 +2,10 @@ import { Dumbbell } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { trpc } from "../api/trpc";
+
 import { Exercises } from "../components/Exercises";
 import { ContentHeader, Header } from "../components/styled/Text";
+import { Navbar } from "..//components/Navbar";
 
 function Home() {
   const [choosedTrainingDay, setTrainingDay] = useState<string | undefined>();
@@ -37,7 +39,7 @@ function Home() {
         <Exercises choosedTrainingDay={choosedTrainingDay} />
       )}
 
-      <div>Footer</div>
+      <Navbar />
     </div>
   );
 }
