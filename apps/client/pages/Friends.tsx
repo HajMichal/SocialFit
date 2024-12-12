@@ -3,7 +3,7 @@ import React from "react";
 
 function Friends() {
   return (
-    <div>
+    <div className="bg-background min-h-screen w-full">
       <Navbar />
     </div>
   );

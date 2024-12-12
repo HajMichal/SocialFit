@@ -18,7 +18,7 @@ export const Navbar = memo(function Navbar() {
       <div className="flex justify-evenly items-center h-full">
         <Icon
           onClick={() => navigate(routes.home)}
-          isActive={isActive(routes.home)}
+          $isActive={isActive(routes.home)}
         >
           <House size={32} />
         </Icon>
@@ -29,7 +29,7 @@ export const Navbar = memo(function Navbar() {
 
         <Icon
           onClick={() => navigate(routes.friends)}
-          isActive={isActive(routes.friends)}
+          $isActive={isActive(routes.friends)}
         >
           <Users size={32} />
         </Icon>
@@ -39,8 +39,8 @@ export const Navbar = memo(function Navbar() {
 });
 
 const Icon = styled.div<{
-  isActive?: boolean;
+  $isActive?: boolean;
 }>`
   padding: 6px;
-  color: ${(props) => (props.isActive ? "#02CF8A" : "#212121")};
+  color: ${(props) => (props.$isActive ? "#02CF8A" : "#212121")};
 `;

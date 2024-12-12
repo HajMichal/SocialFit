@@ -12,7 +12,7 @@ export function Exercises({ choosedTrainingDay }: ExercisesType) {
     trpc.example.exercises.useQuery(choosedTrainingDay);
 
   return (
-    <div className="w-full">
+    <div>
       <Header>Exercises</Header>
 
       <div className="w-full flex flex-col items-center gap-2">

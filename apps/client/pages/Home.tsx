@@ -4,25 +4,27 @@ import styled from "styled-components";
 import { trpc } from "../api/trpc";
 
 import { Exercises } from "../components/Exercises";
-import { ContentHeader, Header } from "../components/styled/Text";
-import { Navbar } from "..//components/Navbar";
+import { ContentHeader, Header, NameHeader } from "../components/styled/Text";
+import { Navbar } from "../components/Navbar";
+import { Calendar } from "../components/Calendar";
 
 function Home() {
   const [choosedTrainingDay, setTrainingDay] = useState<string | undefined>();
 
-  const { data: users, isFetched } = trpc.example.users.useQuery();
+  const { data: user, isFetched } = trpc.example.users.useQuery();
 
   useEffect(() => {
-    if (isFetched) setTrainingDay(users?.trainings[0].trainingDay[0].id);
+    if (isFetched) setTrainingDay(user?.trainings[0].trainingDay[0].id);
   }, [isFetched]);
 
   return (
     <div className="bg-background min-h-screen">
-      <div>Calendar</div>
+      <NameHeader>Hello {user?.name}!</NameHeader>
+      <Calendar />
       <div className="w-full">
         <Header>Next trainings</Header>
         <div className="overflow-x-auto px-0.5 py-3 whitespace-nowrap gap-7">
-          {users?.trainings[0].trainingDay.map((trainingDay) => {
+          {user?.trainings[0].trainingDay.map((trainingDay) => {
             return (
               <TrainingTile
                 key={trainingDay.id}
@@ -44,7 +46,9 @@ function Home() {
   );
 }
 export default Home;
-
+const Test = styled.h1`
+  font-weight: 700;
+`;
 const TrainingTile = styled.div`
   display: inline-block;
   width: 33%;
