@@ -17,7 +17,20 @@ import {
 import * as Select from "@radix-ui/react-select";
 import { AnimatePresence, motion } from "framer-motion";
 
-const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export async function fetchTrainingDays(start: Date, end: Date) {
   // This is where you'd implement your actual backend fetching logic
@@ -31,6 +44,7 @@ export async function fetchTrainingDays(start: Date, end: Date) {
 
 export function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [choosedMonth, setMonth] = useState(formatMonth(currentDate));
   const [weekDates, setWeekDates] = useState<Date[]>([]);
   const [trainingDays, setTrainingDays] = useState<Date[]>([]);
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(
@@ -59,6 +73,13 @@ export function Calendar() {
     setCurrentDate(newDate);
   };
 
+  const navigateMonth = (value: string) => {
+    setMonth(value);
+    const newDate = new Date(currentDate);
+    newDate.setMonth(MONTHS.indexOf(value));
+    setCurrentDate(newDate);
+  };
+
   const isTrainingDay = (date: Date) => {
     return trainingDays.some(
       (trainingDate) => trainingDate.toDateString() === date.toDateString()
@@ -66,74 +87,34 @@ export function Calendar() {
   };
 
   return (
-    // <CenterContent>
-    //   <CalendarContainer>
-    //     <div className="flex w-full justify-between items-center px-4 mt-2">
-    //       <SmallText>Scheduled training days</SmallText>
-    //       <ChooseMonth>
-    //         November <ChevronDown size={22} color="#212121" />
-    //       </ChooseMonth>
-    //     </div>
-    //     <div className="h-40 w-full">
-    //       <Select.Root
-    //         value={formatMonth(currentDate)}
-    //         onValueChange={() => {}}
-    //       >
-    //         <Select.Trigger className="inline-flex items-center justify-center rounded px-[15px] text-[13px] leading-none h-[35px] gap-[5px] bg-white text-violet11 shadow-[0_2px_10px] shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-violet9 outline-none">
-    //           <Select.Value>{formatMonth(currentDate)}</Select.Value>
-    //           <Select.Icon className="text-violet11">
-    //             <ChevronDownIcon />
-    //           </Select.Icon>
-    //         </Select.Trigger>
-    //         <Select.Portal>
-    //           <Select.Content className="overflow-hidden bg-white rounded-md shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
-    //             <Select.Viewport className="p-[5px]">
-    //               <Select.Item
-    //                 value={formatMonth(currentDate)}
-    //                 className="text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
-    //               >
-    //                 <Select.ItemText>
-    //                   {formatMonth(currentDate)}
-    //                 </Select.ItemText>
-    //                 <Select.ItemIndicator className="absolute left-0 w-[25px] inline-flex items-center justify-center">
-    //                   <CheckIcon />
-    //                 </Select.ItemIndicator>
-    //               </Select.Item>
-    //             </Select.Viewport>
-    //           </Select.Content>
-    //         </Select.Portal>
-    //       </Select.Root>
-    //     </div>
-    //   </CalendarContainer>
-    // </CenterContent>
     <CenterContent>
       <CalendarContainer>
         <div className="flex items-center justify-between mb-6">
           <ContentHeader>Scheduled training days</ContentHeader>
-          <Select.Root
-            value={formatMonth(currentDate)}
-            onValueChange={() => {}}
-          >
+
+          <Select.Root value={choosedMonth} onValueChange={navigateMonth}>
             <Select.Trigger>
               <ChooseMonth>
-                <Select.Value>{formatMonth(currentDate)}</Select.Value>{" "}
+                <Select.Value>{choosedMonth}</Select.Value>{" "}
                 <ChevronDown size={22} color="#212121" />
               </ChooseMonth>
             </Select.Trigger>
             <Select.Portal>
-              <Select.Content>
-                <Select.Viewport className="p-[5px]">
-                  {/* <Select.Item
-                    value={formatMonth(currentDate)}
-                    className="text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
-                  >
-                    <Select.ItemText>
-                      {formatMonth(currentDate)}
-                    </Select.ItemText>
-                    <Select.ItemIndicator className="absolute left-0 w-[25px] inline-flex items-center justify-center">
-                      <CheckIcon />
-                    </Select.ItemIndicator>
-                  </Select.Item> */}
+              <Select.Content position="popper" className="h-full bg-white">
+                <Select.Viewport className="p-3">
+                  {MONTHS.filter((month) => choosedMonth !== month).map(
+                    (month) => {
+                      return (
+                        <Select.Item
+                          key={month}
+                          value={month}
+                          className="my-1 p-1 rounded-lg"
+                        >
+                          {month}
+                        </Select.Item>
+                      );
+                    }
+                  )}
                 </Select.Viewport>
               </Select.Content>
             </Select.Portal>
