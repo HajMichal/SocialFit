@@ -16,6 +16,11 @@ export const rolesEnum = pgEnum("roles", ["gymmer", "trainer", "admin"]);
 export const roleEnum = pgEnum("role", ["gymmer", "trainer", "admin"]);
 
 export type User = InferSelectModel<typeof users>;
+export type UserWithRelations = User & {
+  trainings: TrainingsWithRelations[];
+  // friends: User[];
+  // session: Sessions | null;
+};
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),
@@ -56,6 +61,9 @@ export const friendships = pgTable("friendships", {
 });
 
 export type Trainings = InferSelectModel<typeof trainings>;
+export type TrainingsWithRelations = Trainings & {
+  trainingDay: TrainingDay[];
+};
 export const trainings = pgTable("trainings", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),

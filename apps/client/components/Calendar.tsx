@@ -1,10 +1,4 @@
-import {
-  CheckIcon,
-  ChevronDown,
-  ChevronDownIcon,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ContentHeader, ShortDescription, SmallText } from "./styled/Text";
@@ -16,6 +10,7 @@ import {
 } from "../utils/date";
 import * as Select from "@radix-ui/react-select";
 import { AnimatePresence, motion } from "framer-motion";
+import { CenterContent } from "./styled/Containers";
 
 const MONTHS = [
   "January",
@@ -32,14 +27,9 @@ const MONTHS = [
   "December",
 ];
 
+// Mocked query output
 export async function fetchTrainingDays(start: Date, end: Date) {
-  // This is where you'd implement your actual backend fetching logic
-  // For now, we'll return some mock data
-  return [
-    new Date("2024-12-12"),
-    new Date("2024-11-15"),
-    // Add more dates as needed
-  ];
+  return [new Date("2024-12-12"), new Date("2024-11-15")];
 }
 
 export function Calendar() {
@@ -173,11 +163,6 @@ export function Calendar() {
   );
 }
 
-export const CenterContent = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
 const CalendarContainer = styled.div`
   width: 90%;
   background-color: white;
