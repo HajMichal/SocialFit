@@ -4,7 +4,7 @@ import { trpc } from "../api/trpc";
 import { Exercises } from "../components/Exercises";
 import { NameHeader } from "../components/styled/Text";
 import { Navbar } from "../components/Navbar";
-import { Calendar } from "../components/Calendar";
+import { Calendar } from "../components/calendar/Calendar";
 import { AvaivableTrainings } from "../components/AvaivableTrainings";
 import { PageContainer } from "../components/styled/Containers";
 

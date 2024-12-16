@@ -1,16 +1,13 @@
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { ContentHeader, ShortDescription, SmallText } from "./styled/Text";
-import {
-  formatDate,
-  formatMonth,
-  formatWeekDay,
-  getWeekDates,
-} from "../utils/date";
 import * as Select from "@radix-ui/react-select";
+import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
-import { CenterContent } from "./styled/Containers";
+
+import { ContentHeader } from "../styled/Text";
+import { formatMonth, getWeekDates } from "../../utils/date";
+import { CenterContent } from "../styled/Containers";
+import { CalendarWeek } from "./CalendarWeek";
 
 const MONTHS = [
   "January",
@@ -28,7 +25,7 @@ const MONTHS = [
 ];
 
 // Mocked query output
-export async function fetchTrainingDays(start: Date, end: Date) {
+export async function fetchTrainingDays() {
   return [new Date("2024-12-12"), new Date("2024-11-15")];
 }
 
@@ -46,10 +43,12 @@ export function Calendar() {
     setWeekDates(dates);
 
     // Fetch training days for the current week
-    const start = dates[0];
-    const end = dates[dates.length - 1];
-    fetchTrainingDays(start, end).then(setTrainingDays);
+    fetchTrainingDays().then(setTrainingDays);
   }, [currentDate]);
+
+  useEffect(() => {
+    setMonth(formatMonth(currentDate));
+  }, [formatMonth(currentDate)]);
 
   const navigateWeek = (direction: "prev" | "next") => {
     const newDate = new Date(currentDate);
@@ -70,12 +69,6 @@ export function Calendar() {
     setCurrentDate(newDate);
   };
 
-  const isTrainingDay = (date: Date) => {
-    return trainingDays.some(
-      (trainingDate) => trainingDate.toDateString() === date.toDateString()
-    );
-  };
-
   return (
     <CenterContent>
       <CalendarContainer>
@@ -85,7 +78,7 @@ export function Calendar() {
           <Select.Root value={choosedMonth} onValueChange={navigateMonth}>
             <Select.Trigger>
               <ChooseMonth>
-                <Select.Value>{choosedMonth}</Select.Value>{" "}
+                <Select.Value>{choosedMonth}</Select.Value>
                 <ChevronDown size={22} color="#212121" />
               </ChooseMonth>
             </Select.Trigger>
@@ -124,23 +117,7 @@ export function Calendar() {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="grid grid-cols-7"
             >
-              {weekDates.map((date, index) => (
-                <div
-                  key={date.toISOString()}
-                  className="flex flex-col items-center"
-                >
-                  <ShortDescription>{formatWeekDay(date)}</ShortDescription>
-                  <SmallText
-                    className={
-                      isTrainingDay(date)
-                        ? "border-b-[3px] border-brand pb-1"
-                        : "pb-[7px]"
-                    }
-                  >
-                    {formatDate(date)}
-                  </SmallText>
-                </div>
-              ))}
+              <CalendarWeek weekDates={weekDates} trainingDays={trainingDays} />
             </motion.div>
           </AnimatePresence>
 

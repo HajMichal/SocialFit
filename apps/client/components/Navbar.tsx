@@ -6,6 +6,7 @@ import styled from "styled-components";
 const routes = {
   home: "/home",
   friends: "/friends",
+  createTrainng: "/create/training",
 };
 
 export const Navbar = memo(function Navbar() {
@@ -23,7 +24,10 @@ export const Navbar = memo(function Navbar() {
           <House size={32} />
         </Icon>
 
-        <Icon className="bg-dark rounded-xl -mt-14">
+        <Icon
+          className="bg-dark rounded-xl -mt-14"
+          onClick={() => navigate(routes.createTrainng)}
+        >
           <Plus size={34} color="white" />
         </Icon>
 
