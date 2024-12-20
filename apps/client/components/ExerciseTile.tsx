@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { ContentHeader, ShortDescription } from "./styled/Text";
 import { Dumbbell } from "lucide-react";
-import { Exercises } from "@server/db/schema";
+import { type Exercises } from "../../server/db/schema";
 import { LongTile, LongTileContent, LongTileDetail } from "./styled/Tiles";
 
 export function ExerciseTile({ exercise }: { exercise: Exercises }) {

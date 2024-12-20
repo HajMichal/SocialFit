@@ -2,17 +2,21 @@
     "compilerOptions": {
       "target": "esnext",
       "module": "esnext",
-      "moduleResolution": "node",
+      "moduleResolution": "bundler",
       "strict": true,
       "jsx": "react",
       "esModuleInterop": true,
       "skipLibCheck": true,
+      "noFallthroughCasesInSwitch": true,
+      "allowImportingTsExtensions": true,
+      "verbatimModuleSyntax": true,
+      "noEmit": true,
       "baseUrl": "./",
       "paths": {
         "@client/*": ["apps/client/*"],
         "@server/*": ["apps/server/*"]
       },
-      "types": ["node", "vite/client"]
+      "types": ["bun-types", "vite/client"]
     },
     "include": ["apps/**/*", "server/db", "server/api"],
     "exclude": ["node_modules"]

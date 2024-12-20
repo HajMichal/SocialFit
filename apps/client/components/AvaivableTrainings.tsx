@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { ContentHeader, Header } from "./styled/Text";
 import styled from "styled-components";
-import { UserWithRelations } from "@server/db/schema";
+import { type UserWithRelations } from "../../server/db/schema";
 import { Dumbbell } from "lucide-react";
 
 type Props = {

@@ -9,7 +9,7 @@ import {
   varchar,
   jsonb,
 } from "drizzle-orm/pg-core";
-import { InferSelectModel, relations } from "drizzle-orm";
+import { type InferSelectModel, relations } from "drizzle-orm";
 
 export const rolesEnum = pgEnum("roles", ["gymmer", "trainer", "admin"]);
 

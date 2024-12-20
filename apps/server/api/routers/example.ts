@@ -1,4 +1,4 @@
-import { Exercises } from "@server/db/schema";
+import { type Exercises } from "@server/db/schema";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
 
