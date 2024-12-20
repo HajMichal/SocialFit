@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { ContentHeader, Header } from "./styled/Text";
 import styled from "styled-components";
 import { UserWithRelations } from "@server/db/schema";
@@ -8,7 +8,10 @@ type Props = {
   user: UserWithRelations | undefined;
   setTrainingDay: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
-export function AvaivableTrainings({ user, setTrainingDay }: Props) {
+export const AvaivableTrainings = memo(function ({
+  user,
+  setTrainingDay,
+}: Props) {
   return (
     <div className="w-full">
       <Header>Next trainings</Header>
@@ -27,7 +30,7 @@ export function AvaivableTrainings({ user, setTrainingDay }: Props) {
       </div>
     </div>
   );
-}
+});
 
 const TrainingTile = styled.div`
   display: inline-block;

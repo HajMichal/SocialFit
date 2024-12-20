@@ -1,5 +1,5 @@
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import * as Select from "@radix-ui/react-select";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
@@ -29,7 +29,7 @@ export async function fetchTrainingDays() {
   return [new Date("2024-12-12"), new Date("2024-11-15")];
 }
 
-export function Calendar() {
+export const Calendar = memo(function () {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [choosedMonth, setMonth] = useState(formatMonth(currentDate));
   const [weekDates, setWeekDates] = useState<Date[]>([]);
@@ -138,7 +138,7 @@ export function Calendar() {
       </CalendarContainer>
     </CenterContent>
   );
-}
+});
 
 export const CalendarContainer = styled.div`
   width: 90%;

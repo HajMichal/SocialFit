@@ -1,5 +1,4 @@
-import type { Exercises } from "@server/db/schema";
-import React from "react";
+import React, { memo } from "react";
 import { trpc } from "../api/trpc";
 import { Header } from "./styled/Text";
 import { ExerciseTile } from "./ExerciseTile";
@@ -7,7 +6,7 @@ import { ExerciseTile } from "./ExerciseTile";
 interface ExercisesType {
   choosedTrainingDay: string;
 }
-export function Exercises({ choosedTrainingDay }: ExercisesType) {
+export const Exercises = memo(function ({ choosedTrainingDay }: ExercisesType) {
   const { data: exercises } =
     trpc.example.exercises.useQuery(choosedTrainingDay);
 
@@ -22,4 +21,4 @@ export function Exercises({ choosedTrainingDay }: ExercisesType) {
       </div>
     </div>
   );
-}
+});
