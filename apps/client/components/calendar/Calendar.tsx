@@ -140,7 +140,7 @@ export function Calendar() {
   );
 }
 
-const CalendarContainer = styled.div`
+export const CalendarContainer = styled.div`
   width: 90%;
   background-color: white;
   box-shadow: 0px 4px 4px 0px #d7d7d7;

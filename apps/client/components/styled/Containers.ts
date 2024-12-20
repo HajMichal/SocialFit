@@ -4,7 +4,7 @@ export const PageContainer = styled.div`
   padding-bottom: 20px;
   height: 90vh;
   overflow-y: auto;
-  background-color: #f9f9f9;
+  background-color: ${(props) => props.theme.background};
 `;
 
 export const CenterContent = styled.div`

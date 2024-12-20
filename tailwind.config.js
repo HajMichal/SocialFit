@@ -14,20 +14,7 @@ module.exports = {
       montserrat: ["Montserrat"],
       raleway: ["Raleway"],
     },
-    extend: {
-      animation: {
-        'rotate': 'rotate 2s linear infinite',
-      },
-      keyframes: {
-        'rotate': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
-      },
-      boxShadow: {
-        'focus': '0 0 0 4px rgba(2, 207, 138, 0.1)',
-      },
-    },
+    extend: {},
   },
   plugins: [],
 }

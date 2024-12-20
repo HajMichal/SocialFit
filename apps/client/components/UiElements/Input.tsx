@@ -1,7 +1,7 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import { ContentHeader, Header, ShortDescription } from "./styled/Text";
+import { ContentHeader, Header, ShortDescription } from "../styled/Text";
 import { type Icon, Tag } from "@phosphor-icons/react";
-import { CenterContent } from "./styled/Containers";
+import { CenterContent } from "../styled/Containers";
 
 export interface TrainingInputProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -31,7 +31,7 @@ export const Input = forwardRef<HTMLInputElement, TrainingInputProps>(
     ref
   ) => {
     return (
-      <CenterContent className="mt-2">
+      <CenterContent className="mt-5">
         <div className={`w-[85%] space-y-2", ${className}`}>
           <div className="flex gap-1 mb-2 items-end">
             <ContentHeader className={labelClassName}>{label}</ContentHeader>

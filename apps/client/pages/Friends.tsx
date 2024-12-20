@@ -2,7 +2,7 @@ import React from "react";
 
 import { PageContainer } from "../components/styled/Containers";
 import { FriendsList } from "../components/FriendsList";
-import { SearchBar } from "../components/SearchBar";
+import { SearchBar } from "../components/UiElements/SearchBar";
 import { Navbar } from "../components/Navbar";
 
 function Friends() {
