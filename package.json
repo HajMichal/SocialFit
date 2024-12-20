@@ -1,7 +1,7 @@
 {
   "scripts": {
     "client": "vite ./apps/client",
-    "server": "bun run --hot apps/server/index.ts",
+    "server": "bun run /apps/server/index.ts",
     "dev": "bun run server & bun run client",
     "drizzle:seed": "bun --loader esbuild-register ./aps/server/db/seed.ts"
   },
